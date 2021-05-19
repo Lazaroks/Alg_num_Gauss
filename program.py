@@ -5,8 +5,9 @@ def napraw(wynik, i):
     for j in range(i, len(wynik)):
         if wynik[j][i]!=0:
             n=j
+            break
     if n==i: 
-        print("Macierz nie jest policzalna!")
+        print("Wyznacznik równy 0")
         return False
     else: 
         wynik[[i, n]]=wynik[[n, i]]
@@ -31,6 +32,16 @@ def wyznacz(wynik):
     print("Wyznacznik macierzy det(A) = " + str(det))    
                 
     
-wynik=np.array([[1,3,0,-1],[1,2,3,3],[3,1,1,1],[3,2,0,3]], dtype=float)
-wynik2=np.array([[1,-2,1,1],[2,-4,-1,1],[-1,2,2,-1],[1,-2,-1,-1]], dtype=float)
-wyznacz(wynik2)
+# wynik=np.array([[1,3,0,-1],[1,2,3,3],[3,1,1,1],[3,2,0,3]], dtype=float)
+# wynik2=np.array([[1,-2,1,1],[2,-4,-1,1],[-1,2,2,-1],[1,-2,-1,-1]], dtype=float)
+
+try:
+    with open("dane.txt") as f:
+        lines = f.readlines()
+        matrix = []
+        for line in lines:
+            matrix.append(line.split(" "))
+        wynik2 = np.array(matrix, dtype=float)
+        wyznacz(wynik2)
+except FileNotFoundError:
+    print("File not found")
