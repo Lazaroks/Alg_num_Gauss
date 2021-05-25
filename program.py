@@ -1,5 +1,6 @@
 import numpy as np
 
+import numpy as np
 
 def napraw(wynik, i):
     n=i
@@ -25,12 +26,11 @@ def wyznacz(wynik):
                 wynik[j][z]=wynik[j][z]-(licz*wynik[i][z])
             print("{}\n{}\n".format(licz, wynik))
         det=det*wynik[i][i]
-    print("Wyznacznik macierzy det(A) = {}".format(det))    
+    print("Wyznacznik macierzy det(A) = " + str(det))    
                 
     
-wynik=np.array([[1,3,0,-1],[1,2,0,3],[3,1,1,1],[0,2,0,3]], dtype=float)
-wynik2=np.array([[1,-2,1,1],[2,-4,-1,1],[-1,2,2,-1],[1,-2,-1,-1]], dtype=float)
-wyznacz(wynik)
+# wynik=np.array([[1,3,0,-1],[1,2,3,3],[3,1,1,1],[3,2,0,3]], dtype=float)
+# wynik2=np.array([[1,-2,1,1],[2,-4,-1,1],[-1,2,2,-1],[1,-2,-1,-1]], dtype=float)
 
 try:
     with open("dane.txt") as f:
