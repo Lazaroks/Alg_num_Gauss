@@ -40,12 +40,23 @@ def mapa(x, y):
 # wynik2=np.array([[1,-2,1,1],[2,-4,-1,1],[-1,2,2,-1],[1,-2,-1,-1]], dtype=float)
 
 try:
+    with open("zakres.txt") as z:
+        a, b = list( map( lambda x: int(x), z.readline().split(" ") ) )
+        zakres = range(min(a,b), max(a,b)+1)
     with open("dane.txt") as f:
         lines = f.readlines()
         t_flag = 0
+        dimension_flag = 0
+        rozmiar_pierwszego_wiersza = len(lines[0].split(" "))
+        if len(lines) != rozmiar_pierwszego_wiersza:
+            dimension_flag = 1
         for line in lines:
             if 't' in line:
                 t_flag = 1
+            if len(line.split(" ")) != rozmiar_pierwszego_wiersza:
+                dimension_flag = 1
+        if dimension_flag == 1:
+            raise Exception("Macierz nie-kwadratowa")
         
         if t_flag == 0:
             matrix = []
@@ -55,7 +66,7 @@ try:
             wyznacz(macierz)
         else:
             # matrices = []
-            zakres = range(-5, 5)
+            # zakres = range(-5, 5)
             for i in zakres:
                 matrix = []
                 for line in lines:
@@ -68,3 +79,5 @@ try:
 
 except FileNotFoundError:
     print("File not found")
+except Exception as ex:
+    print(ex.args)
